@@ -7,8 +7,10 @@ function initMonthlyOptions() {
 
   var sheetName = 'Итог ' + OPTIONS.startDate.toLocaleDateString('ru-RU', {month: 'long', year: 'numeric'}).substr(2);
   var existingSheet = _ss.getSheetByName(sheetName);
-  if (existingSheet) _ss.deleteSheet(existingSheet);
-  createNewSheet(sheetName, '#ffd966');
+  if (existingSheet)
+    existingSheet.activate();
+  else
+    createNewSheet(sheetName, '#ffd966');
 }
 
 function createNewSheet(name, color) {

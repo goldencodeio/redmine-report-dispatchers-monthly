@@ -67,6 +67,12 @@ function processReports() {
   var rowI = 2;
   var columnI = 2;
 
+  // fix bug for increase quantity columns
+  for (var i = 2; i <= 33; i++) {
+    sheet.getRange(rowI, i).setBackground('#fff');
+  }
+  // end fix
+
   OPTIONS.performers.forEach(function(user, userIndex) {
     REPORT.forEach(function(report) {
       if (!report.manual) {
@@ -90,7 +96,7 @@ function processReports() {
       } else {
         switch (report.code) {
           case 'feedback_rating_avg':
-            sheet.getRange(rowI, columnI).setFormula('=SUM((C' + rowI + '*5)/(B' + (OPTIONS.performers.length + 3) + '/2))');
+            sheet.getRange(rowI, columnI).setFormula('=SUM((C' + rowI + '*5)/(B' + (OPTIONS.performers.length + 3) + '/' + OPTIONS.performers.length + '))');
             break;
 
           case 'work_rating_avg':
@@ -98,7 +104,7 @@ function processReports() {
             break;
 
           case 'involvement_rating_avg':
-            sheet.getRange(rowI, columnI).setFormula('=SUM(AH' + (rowI + 6) + ')');
+            sheet.getRange(rowI, columnI).setFormula('=SUM(AG' + (rowI + 6) + ')');
             break;
 
           case 'total_rating':
@@ -118,19 +124,20 @@ function processReports() {
     rowI++;
   });
 
-  rowI += 2;
-  sheet.getRange(rowI, columnI).setFormula('=SUM(С2:С' + (rowI - 2) + ')');
+  rowI++;
+  sheet.getRange(rowI, columnI).setFormula('=SUM(C2:C' + (rowI - 2) + ')');
 
   rowI += 2;
   for (var i = 1; i <= 31; i++) {
     sheet.getRange(rowI, columnI++).setValue(i).setBackground('#aaa');
   }
-  var countdaysA1 = sheet.getRange(rowI, columnI).setBackground('#ddd').getA1Notation();  
+  var countdaysA1 = sheet.getRange(rowI++, columnI).setValue(1).setBackground('#ddd').getA1Notation();
   columnI = 2;
 
   OPTIONS.performers.forEach(function(user) {
     var rangeA1 = sheet.getRange(rowI, columnI, 1, 31).getA1Notation();
     columnI = 33;
     sheet.getRange(rowI++, columnI).setBackground('#aaa').setFormula('=SUM((5*COUNTA(' + rangeA1 + '))/' + countdaysA1 + ')');
+    columnI = 2;
   });
 }

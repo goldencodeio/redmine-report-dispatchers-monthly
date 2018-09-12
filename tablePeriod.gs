@@ -22,11 +22,11 @@ function writePeriodUserRows(color) {
     OPTIONS.performers[i] = userData;
   });
 
-  rowI+=2;
+  rowI++;
   sheet.getRange(rowI, 1).setValue('Всего задач');
 
   rowI+=3;
   OPTIONS.performers.forEach(function(user, i) {
-    sheet.getRange(rowI++, 1).setValue(user.firstname + ' ' + user.lastname + ' (' + user.login + ')').setBackground(color);    
+    sheet.getRange(rowI++, 1).setValue(user.firstname + ' ' + user.lastname + ' (' + user.login + ')').setBackground(color);
   });
 }
