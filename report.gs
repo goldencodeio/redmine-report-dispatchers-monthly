@@ -128,10 +128,11 @@ function processReports() {
   sheet.getRange(rowI, columnI).setFormula('=SUM(C2:C' + (rowI - 2) + ')');
 
   rowI += 2;
+  var rangeDaysA1 = sheet.getRange(rowI, columnI, 1, 31).getA1Notation();
   for (var i = 1; i <= 31; i++) {
     sheet.getRange(rowI, columnI++).setValue(i).setBackground('#aaa');
   }
-  var countdaysA1 = sheet.getRange(rowI++, columnI).setValue(1).setBackground('#ddd').getA1Notation();
+  var countdaysA1 = sheet.getRange(rowI++, columnI).setFormula('=COUNTA(' + rangeDaysA1 + ')').setBackground('#ddd').getA1Notation();
   columnI = 2;
 
   OPTIONS.performers.forEach(function(user) {
