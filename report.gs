@@ -50,6 +50,51 @@ var REPORT = [
    manual: true
   },
   {
+   code: 'penalty_did_not_pass_pair',
+   name: 'Не передал/не\nпринял смену у\nдежурного',
+   manual: true
+  },
+  {
+   code: 'penalty_control_timing_tasks',
+   name: '*Контроль соблюдения\nсроков выполнения\nзадач',
+   manual: true
+  },
+  {
+   code: 'penalty_creating_wiki_articles',
+   name: '*Создание не\nменее 3х вики\nстатей',
+   manual: true
+  },
+  {
+   code: 'penalty_getting_OS_by_tasks',
+   name: '*Своевременное\nполучение ОС\nпо выполненным\nзадачам',
+   manual: true
+  },
+  {
+   code: 'penalty_working_with_claim',
+   name: '*Работа с\nпретензиями',
+   manual: true
+  },
+  {
+   code: 'penalty_declarant_data',
+   name: '*Заполнение\nконтактных данных\nЗаявителей',
+   manual: true
+  },
+  {
+   code: 'penalty_info_transfer_sales_department',
+   name: '*Прием, передача\nинформации в\nотдел продаж\nо выявлен-х\nпотребностях',
+   manual: true
+  },
+  {
+   code: 'penalty_give_info_customer',
+   name: '*Предоставление\nинформации клиенту\nпо текущим задачам,\nуслугам, тарифам',
+   manual: true
+  },
+  {
+   code: 'penalty_performance_tasks_of_boss',
+   name: '*Выполнение\nлюбых задач,\nустановленных\nнепросредственным\nили высшим\nРуководителем',
+   manual: true
+  },
+  {
     code: 'total_rating',
     name: 'ВСЕГО',
     manual: true
@@ -108,11 +153,11 @@ function processReports() {
             break;
 
           case 'total_rating':
-            sheet.getRange(rowI, columnI).setFormula('=SUM((((0,65*F' + rowI + ')/5)+((0,35*G' + rowI + ')/5))*5)-SUM(H' + rowI + ':K' + rowI + ')');
+            sheet.getRange(rowI, columnI).setFormula('=SUM((((0,65*F' + rowI + ')/5)+((0,35*G' + rowI + ')/5))*5)-SUM(H' + rowI + ':T' + rowI + ')');
             break;
 
           case 'finally_bonus':
-            sheet.getRange(rowI, columnI).setFormula('=SUM((L' + rowI + '*' + OPTIONS.performersBonus[userIndex] +')/5)');
+            sheet.getRange(rowI, columnI).setFormula('=SUM((U' + rowI + '*' + OPTIONS.performersBonus[userIndex] +')/5)');
             break;
         }
 
