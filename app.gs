@@ -1,13 +1,19 @@
-function createMonthlyReport() {
+function createMonthlyReportOld() {
   initMonthlyOptions();
   initPeriodTable('#fff2cc');
   processReports();
 }
 
+function createMonthlyReport() {
+  initMonthlyOptions();
+  processNewTable();
+}
+
 function onOpen() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.addMenu('GoldenCode Report', [
-    {name: 'Создать Ежемесячный Отчёт', functionName: 'createMonthlyReport'}
+    {name: 'Создать Ежемесячный Отчёт', functionName: 'createMonthlyReport'},
+    {name: 'Создать Ежемесячный Отчёт (старая форма)', functionName: 'createMonthlyReportOld'},
   ]);
 }
 
